@@ -1,0 +1,49 @@
+\begin{tikzpicture}
+
+    \node (A) at (2.5,0) {$ \left\langle A\right\rangle $};
+    \node (B) at (-3.5,0) {$ \left\langle B\right\rangle $};
+    \node (C) at (0,-1.5) {$ \left\langle C\right\rangle $};
+    \node (D) at (0,1.5) {$ \left\langle D\right\rangle $};
+    \node (E) at (0,4) {$ \left\langle E\right\rangle $};
+    \node (F) at (2.5,-3) {$ \left\langle F\right\rangle $};
+
+    \node (BCDA) at (0,0) {$ [B\wedge C\wedge D\rightarrow A] $};
+    \node (1D) at (1.75,2) {$ [1\rightarrow D] $};
+    \node (DEB) at (-3,3) {$ [D\wedge E\rightarrow B] $};
+    \node (DB) at (-2,1.5) {$ [D\rightarrow B] $};
+    \node (EA) at (3,4) {$ [E\rightarrow A] $};
+    \node (1C) at (-2,-0.75) {$ [1\rightarrow C] $};
+    \node (AFC) at (5,-1.5) {$ [A\wedge F\rightarrow C] $};    
+    \node (ABF) at (0,-3) {$ [A\wedge B\rightarrow F] $};
+    \node (CFB) at (-1.5,-4.5) {$ [C\wedge F\rightarrow B] $};
+    
+    \draw[->] (D) to (1D);
+    \draw[->] (BCDA) to (D);
+    \draw[->] (BCDA) to (B);
+    \draw[->] (BCDA) to (C);
+    \draw[->] (DB) to (D);
+    \draw[->] (DEB) to (D);
+    \draw[->] (DEB) to (E);
+%    \draw[->] (B) .. controls (-3.5,1) and (-3.5,2) .. (DEB);
+    \draw[->] (B) to (DEB);    
+    \draw[->] (B) to (DB);
+%    \draw[->] (B) .. controls (-3.5,-3) and (-2.5,-4) .. (CFB.west);	% upravit
+    \draw[->,bend right] (B) to (CFB);
+    \draw[->] (A) to (EA);
+    \draw[->] (A) to (BCDA);
+    \draw[->] (EA) to (E);
+    \draw[->] (C) to (1C);
+    \draw[->] (C) to (AFC);
+%    \draw[->] (ABF.west) .. controls (-2,-3) and (-3.5,-1) .. ([xshift=2]B);
+    \draw[->,bend left] (ABF.west) to (B);
+    \draw[->] (ABF) to (A);
+    \draw[->] (AFC) to (A);
+    \draw[->] (AFC) to (F);
+    \draw[->] (CFB) to (F);
+    \draw[->] (CFB) to (F);
+    \draw[->,bend left] (CFB) to (C.west);
+    \draw[->] (F) to (ABF);
+    
+    \draw[thick,red] \convexpath{EA,DEB,E}{1cm};
+    \draw[thick,green] \convexpath{1D,AFC,CFB,B,DB}{1cm};
+\end{tikzpicture}
