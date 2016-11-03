@@ -1,0 +1,15 @@
+\begin{tikzpicture}[
+grow=down,
+note/.style={font=\footnotesize,black!65},
+level distance=1.3cm]
+\node {$\neg R(f(a,f(b,c))),f(b,f(a,c))$}
+    child {node {$ \neg R(f(b,c),f(a,f(b,f(a,c)))) $}
+        child {node {$ \neg R(c,f(b,f(a,f(a,c)))) $}
+            child {node {$ fail $}}
+            edge from parent
+                node[note,left] {$ 2) $}
+                node[note,right] {$ y/b,x/c,z/f(a,f(a,c)) $}}
+        edge from parent
+            node[note,left] {$ 2) $}
+            node[note,right] {$ y/a, x/f(b,c), z/f(b,f(a,c)) $}};
+\end{tikzpicture}

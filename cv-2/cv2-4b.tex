@@ -1,0 +1,49 @@
+\begin{tikzpicture}[
+grow=down,
+note/.style={font=\footnotesize,black!65},
+level 2/.style={sibling distance=5cm},
+level 3/.style={sibling distance=5cm}]
+\node {$\neg T(a,d)$}
+    child {node {$ \neg T(a,y),\neg E(y,d) $}
+        child {node {$ \neg E(a,d) $}
+            child {node {$ fail $}}
+            edge from parent
+                node[note,left,xshift=-.2cm] {$ 1) $}
+                node[note,right] {$ y/a $}}
+        child {node {$ \neg T(a,y),\neg E(y,u),\neg E(u,d) $}
+            child {node {$ \neg E(a,u),\neg E(u,d) $}
+                child {node {$ \neg E(b,d) $}
+                    child {node {$ fail $}}                    
+                    edge from parent
+                        node[note,left] {$ 3) $}
+                        node[note,right] {$ u/b $}}
+                edge from parent
+                    node[note,left,xshift=-.2cm] {$ 1) $}
+                    node[note,right,xshift=.1cm] {$ y/a $}}
+            child {node {$ \neg T(a,y),\neg E(y,v),\neg E(v,u),\neg E(u,d) $}
+                child {node {$ \neg E(a,v),\neg E(v,u),\neg E(u,d) $}
+                    child {node {$ \neg E(b,u),\neg E(u,d) $}
+                        child {node {$ \neg E(c,d) $}
+                            child {node {$ \Box $}
+                                edge from parent
+                                    node[note,left] {$ 5) $}}
+                            edge from parent
+                                node[note,left] {$ 4) $}
+                                node[note,right] {$ u/c $}}
+                        edge from parent
+                            node[note,left] {$ 3) $}
+                            node[note,right] {$ v/b $}}
+                    edge from parent
+                        node[note,left] {$ 1) $}
+                        node[note,right] {$ y/a $}}
+                edge from parent
+                    node[note,left,xshift=-.3cm] {$ 2) $}
+                    node[note,right,align=right,xshift=.cm] {ren: $ y/v $\\$ x/a $\\$ z/v $}}
+            edge from parent
+                node[note,left,xshift=-.2cm] {$ 2) $}
+                node[note,right,align=right] {ren: $ y/u $\\$ x/a $\\$ z/u $}}
+        edge from parent
+            node[note,left] {$ 2) $}
+            node[note,right,align=left] {$ x/a $\\$ z/d $}
+        };
+\end{tikzpicture}

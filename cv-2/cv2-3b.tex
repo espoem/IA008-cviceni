@@ -1,0 +1,15 @@
+\begin{tikzpicture}[
+grow'=up,
+note/.style={font=\footnotesize,black!65},
+level/.style={sibling distance=3.5cm},
+level distance =1.3cm,
+parent anchor=north,
+child anchor=south]
+\node {$\Box$}
+    child {node {$ x_2\nleq f(x_2) $}
+        child {node {$ x_2\nleq f(x_2),f(x_2)\nleq x_2 $}
+            child {node {$ \neg E(x_1,f(x_1)) $}}
+            child {node {$ x_2\nleq y_2,y_2\nleq x_2,E(x_2,y_2) $}}}
+        child {node {$ f(x_1)\leq x_1 $}}}
+    child {node {$ a\leq y_3 $}};
+\end{tikzpicture}

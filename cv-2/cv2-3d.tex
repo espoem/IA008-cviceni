@@ -1,0 +1,17 @@
+\begin{tikzpicture}[
+grow'=up,
+note/.style={font=\footnotesize,black!65},
+level/.style={sibling distance=4.5cm},
+level distance =1.3cm,
+parent anchor=north,
+child anchor=south]
+\node {$\Box$}
+    child {node {$ \neg E(x_1,f(f(x_1))) $}
+        child {node {$ \neg R(f(x_1),z_2),\neg E(x_1,z_2) $}
+            child {node {$ \neg R(f(x_1),z_2),R(x_1,z_2) $}
+                child {node {$ \neg R(x_2,y_2),\neg E(y_2,z_2), R(x_2,z_2) $}}
+                child {node {$ R(x_1,f(x_1)) $}}}
+            child {node {$ \neg E(x_3,y-3),\neg R(x_3,y_3) $}}}
+        child {node {$ R(x_1,f(x_1)) $}}}
+    child {node {$ E(a,f(f(a))) $}};
+\end{tikzpicture}

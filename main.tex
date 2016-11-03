@@ -1,0 +1,313 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english,czech]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{tikz}
+\usepackage{amssymb}	% multline
+\usepackage{amsthm}		% theoremstyle
+\usepackage[fleqn]{amsmath}	% multline
+\usepackage{todonotes}
+
+\theoremstyle{definition}
+%\newtheorem{exercise}{Exercise}
+\newtheorem{priklad}{Příklad}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand{\labelenumii}{(\roman{enumii})}
+
+\makeatletter
+\newcommand{\specialcell}[1]{\ifmeasuring@#1\else\omit$\displaystyle#1$\ignorespaces\fi}
+\makeatother
+
+\begin{document}
+\section*{Cvičení 2}
+\setcounter{priklad}{0}
+\begin{priklad}
+    Nechť $ f $ je binární funkční symbol, $ g,h $ jsou unární funkční symboly a $ c $ je konstanta.
+    \begin{enumerate}
+        \item Najděte nejobecnější unifikátor pro následující dvojice termů.
+        \begin{enumerate}
+            \item $ f(g(x),y) \mbox{\quad a\quad} f(x,h(y))$
+            \item $ f(h(x),y) \mbox{\quad a\quad} f(x,h(y))$
+            \item $ f(x,f(x,g(y))) \mbox{\quad a\quad} f(y,f(h(c),x))$
+            \item $ f(f(x,c),g(f(y,x)) \mbox{\quad a\quad} f(x,g(y))$
+        \end{enumerate}
+        \item Vyřešte následující množinu rovnic termů.
+        \[ x=f(y,z),\quad y=g(u),\quad z=h(y),\quad u=f(v,w),\quad v=f(c,w) \]
+    \end{enumerate}
+\noindent\rule{\linewidth}{.2pt}
+    \todo{Ověřit správnost 2. příkladu}
+    \begin{enumerate}
+        \item Najděte nejobecnější unifikátor pro následující dvojice termů.
+        \begin{enumerate}
+            \item nelze unifikovat
+            \item nelze unifikovat
+            \item nelze unifikovat
+            \item nelze unifikovat
+        \end{enumerate}
+        \item $ x=f(g(f(f(c,w),w)),h(g(f(f(c,w),w)))) $
+    \end{enumerate}
+\end{priklad}
+
+\begin{priklad}
+    Uvažte následující formule
+    \begin{enumerate}
+        \item $ \exists x\exists y\forall z [z=x \vee z=y] $
+        \item $ \forall x[\exists yR(x,y) \rightarrow \exists yR(y,x)] $
+        \item $ \forall x\left[\forall y\exists z[R(x,f(y,z))]\rightarrow \forall y\forall z[R(f(x,y),f(x,z))\vee R(y,z)\right] $
+        \item $ \exists x\forall yR(x,y)\wedge\forall x\exists yR(x,y)\wedge \forall x\forall y\left[R(x,y)\rightarrow\exists z\left[R(x,z)\wedge R(z,x)\right]\right] $
+    \end{enumerate}
+
+    Každou z nich
+    \begin{enumerate}
+        \item převeďte do Skolemovy normální formy,
+        \item převeďte do množiny klauzulí.
+    \end{enumerate}
+\noindent\rule{\linewidth}{.2pt}
+    \begin{enumerate}
+        \item SNF:
+
+        $ \forall z\left[z=a\vee z=b\right] $
+
+        MK:
+
+        $ \left\lbrace z=a, z=b\right\rbrace $
+
+        \item
+        {\setlength{\mathindent}{0cm}
+        \setlength\abovedisplayskip{-1.5em}
+        \begin{multline*}
+        \forall x[\exists yR(x,y) \rightarrow \exists yR(y,x)] \approx \forall x[\exists y_1R(x,y_1) \rightarrow \exists y_2R(y_2,x)] \approx
+        \forall x[\neg \exists y_1R(x,y_1) \vee \exists y_2R(y_2,x)] \approx\\
+        \forall x[\forall y_1\neg R(x,y_1) \vee \exists y_2R(y_2,x)] \approx
+        \forall x\forall y_1\exists y_2[\neg R(x,y_1) \vee R(y_2,x)] \approx\\
+        \forall x\forall y_1[\neg R(x,y_1) \vee R(f(x,y_1),x)]
+        \end{multline*}
+        }
+
+
+        PNF:
+
+        $ \forall x\forall y_1\exists y_2[\neg R(x,y_1) \vee R(y_2,x)] $
+
+        SNF:
+
+        $ \forall x\forall y_1[\neg R(x,y_1) \vee R(f(x,y_1),x)] $
+
+        MK:
+
+        $ \lbrace\neg R(x,y_1), R(f(x,y_1),x)\rbrace $
+
+        \item
+       {\setlength{\mathindent}{0cm}
+        \setlength\abovedisplayskip{-1.5em}
+        \begin{multline*}
+        \forall x[\forall y\exists z[R(x,f(y,z))]\rightarrow \forall y\forall z[R(f(x,y),f(x,z))\vee R(y,z)] \approx\\
+         \forall x[\neg \forall y_1\exists z_1[R(x,f(y_1,z_1))]\vee\forall y_2\forall z_2[R(f(x,y_2),f(x,z_2))\vee R(y_2,z_2)] \approx\\
+         \forall x \exists y_1\forall z_1\forall y_2\forall z_2[\neg R(x,f(y_1,z_1))\vee R(f(x,y_2),f(x,z_2))\vee R(y_2,z_2)] \approx\\
+         \forall x\forall z_1\forall y_2\forall z_2[\neg R(x,f(f(x),z_1))\vee R(f(x,y_2),f(x,z_2))\vee R(y_2,z_2)]
+        \end{multline*}}
+
+        PNF:
+
+        $ \forall x \exists y_1\forall z_1\forall y_2\forall z_2[\neg R(x,f(y_1,z_1))\vee [R(f(x,y_2),f(x,z_2))\vee R(y_2,z_2)] $
+
+        SNF:
+
+        $ \forall x\forall z_1\forall y_2\forall z_2[\neg R(x,f(f(x),z_1))\vee [R(f(x,y_2),f(x,z_2))\vee R(y_2,z_2)] $
+
+        MK:
+
+        $ \lbrace\neg R(x,f(f(x),z_1)), R(f(x,y_2),f(x,z_2)), R(y_2,z_2)\rbrace $
+
+        \item
+        {\setlength{\mathindent}{0cm}
+        \setlength\abovedisplayskip{-1.5em}
+        \begin{multline*}
+        \exists x\forall yR(x,y)\wedge\forall x\exists yR(x,y)\wedge \forall x\forall y\left[R(x,y)\rightarrow\exists z\left[R(x,z)\wedge R(z,x)\right]\right] \approx\\
+        \exists x_1\forall y_1R(x_1,y_1)\wedge\forall x_2\exists y_2R(x_2,y_2)\wedge \forall x_3\forall y_3\left[\neg R(x_3,y_3)\vee\exists z\left[R(x_3,z)\wedge R(z,x_3)\right]\right] \approx\\
+        \exists x_1\forall y_1\forall x_2\exists y_2\forall x_3\forall y_3\exists z[R(x_1,y_1)\wedge R(x_2,y_2)\wedge \left[\neg R(x_3,y_3)\vee R(x_3,z)\right]\wedge[\neg R(x_3,y_3)\vee R(z,x_3)]]\approx\\
+        \forall y_1\forall x_2\forall x_3\forall y_3[R(a,y_1)\wedge R(x_2,f(x_2))\wedge \left[\neg R(x_3,y_3)\vee R(x_3,f(x_3,y_3))\right]\wedge\\ \wedge[\neg R(x_3,y_3)\vee R(f(x_3,y_3),x_3)]]
+        \end{multline*}
+        }
+
+        PNF:
+
+        $ \exists x_1\forall y_1\forall x_2\exists y_2\forall x_3\forall y_3\exists z\left[R(x_1,y_1)\wedge R(x_2,y_2)\wedge \left[\neg R(x_3,y_3)\vee R(x_3,z)\right]\wedge\left[\neg R(x_3,y_3)\vee R(z,x_3)\right]\right] $
+
+        SNF:
+
+        {\setlength{\mathindent}{0cm}
+        \setlength\abovedisplayskip{-1.5em}
+        \begin{multline*}
+        \forall y_1\forall x_2\forall x_3\forall y_3[R(a,y_1)\wedge R(x_2,f(x_2))\wedge \left[\neg R(x_3,y_3)\vee R(x_3,f(x_3,y_3))\right]\wedge \\\wedge[\neg R(x_3,y_3)\vee R(f(x_3,y_3),x_3)]]
+        \end{multline*}
+        }
+
+        MK:
+
+        $ \lbrace\lbrace R(a,y_1)\rbrace,\lbrace R(x_2,f(x_2))\rbrace, \lbrace\neg R(x_3,y_3), R(x_3,f(x_3,y_3))\rbrace,\lbrace\neg R(x_3,y_3), R(f(x_3,y_3),x_3)\rbrace\rbrace $
+        
+    \end{enumerate}
+\end{priklad}
+
+\begin{priklad}
+    Pomocí rezoluční metody zjistěte, zda jsou následující formule sporné.
+%    Use the resolution method to check that the following formulae are inconsistent
+    \begin{enumerate}
+        \item $ \forall x\forall y[x\leq y\rightarrow (P(x)\leftrightarrow P(y))]\wedge \forall x\forall y[x\leq y\vee y\leq x]\wedge\exists xP(x)\wedge\exists x\neg P(x) $
+        \item $ \forall x\exists y[y\leq x \wedge\neg E(x,y)]\wedge\forall x\forall y[x\leq y\wedge y\leq x\rightarrow E(x,y)]\wedge \exists x\forall y[x\leq y] $
+        \item $ \forall x\forall y[R(x,y)\rightarrow (P(x)\leftrightarrow \neg P(y))]\wedge\forall x\forall y[R(x,y)\rightarrow \exists z[R(x,z)\wedge R(z,y)]]\wedge \exists x\exists yR(x,y) $
+        \item $ \forall xR(x,f(x))\wedge \forall x\forall y\forall z[R(x,y)\wedge R(y,z)\rightarrow R(x,z)]\wedge\forall x\forall y[E(x,y)\rightarrow\neg R(x,y)]\wedge\exists xE(x,f(f(x))) $
+    \end{enumerate}
+\noindent\rule{\linewidth}{.2pt}
+    \begin{enumerate}
+        \item SNF:
+
+        {\setlength{\mathindent}{0cm}
+        \setlength\abovedisplayskip{-1.5em}
+        \begin{multline*}
+        \forall x_1\forall y_1\forall x_2\forall y_2[(x_1\nleq y_1\vee\neg P(x_1)\vee P(y_1))\wedge (x_1\nleq y_1\vee \neg P(y_1)\vee P(x_1))\wedge (x_2\leq y_2\vee y_2\leq x_2)\wedge \\\wedge P(a)\wedge \neg P(b)]
+        \end{multline*}
+        }
+
+        MK:
+
+        $ \{\{x_1\nleq y_1,\neg P(x_1), P(y_1)\},\{x_1\nleq y_1, \neg P(y_1), P(x_1)\},\{x_2\leq y_2, y_2\leq x_2\},\{P(a)\},\{\neg P(b)\}\} $
+
+        \begin{figure}[htb]
+            \centering
+            \input{cv-2/cv2-3a.tex}
+            \caption{Strom k příkladu 3 a)}
+        \end{figure}
+
+        Závěr: Formule je bezesporná (konzistentní).
+
+        \item SNF:
+
+        $ \forall x_1\forall x_2\forall y_2\forall y_3[f(x_1)\leq x_1\wedge\neg E(x_1,f(x_1))\wedge [x_2\nleq y_2\vee y_2\nleq x_2\vee E(x_2,y_2)]\wedge [a\leq y_3]] $
+
+        MK:
+
+        $ \{\{f(x_1)\leq x_1\},\{\neg E(x_1,f(x_1))\},\{x_2\nleq y_2, y_2\nleq x_2, E(x_2,y_2)\},\{a\leq y_3\}\} $
+
+        \begin{figure}[htb]
+            \centering
+            \input{cv-2/cv2-3b.tex}
+            \caption{Strom k příkladu 3 b)}
+        \end{figure}
+
+        Závěr: Formule je sporná (nekonzistentní).
+
+        \item SNF:
+
+        {\setlength{\mathindent}{0cm}
+        \setlength\abovedisplayskip{-2.5em}
+        \begin{multline*}
+        \forall x_1\forall y_1 \forall x_2\forall y_2 [[\neg R(x_1,y_1)\vee \overbrace{\neg P(x_1)\vee\neg P(y_1)}^{\text{můžeme unifikovat}}]\wedge [\neg R(x_1,y_1)\vee \overbrace{P(y_1)\vee P(x_1)}^{\text{můžeme unifikovat}}]\wedge[\neg R(x_2,y_2)\vee\\
+        \specialcell{\hfill \vee R(x_2,f(x_2,y_2))]\wedge[\neg R(x_2,y_2)\vee R(f(x_2,y_2),y_2)]\wedge R(a,b)] \approx} \\
+        \forall x_1 \forall x_2\forall y_2 [[\neg R(x_1,x_1)\vee \neg P(x_1)]\wedge [\neg R(x_1,x_1)\vee P(x_1)]\wedge[\neg R(x_2,y_2)\vee\\ \vee R(x_2,f(x_2,y_2))]\wedge[\neg R(x_2,y_2)\vee R(f(x_2,y_2),y_2)]\wedge R(a,b)]
+        \end{multline*}
+        }
+
+        MK:
+
+        {\setlength{\mathindent}{0cm}
+        \setlength\abovedisplayskip{-1.5em}
+        \begin{multline*}
+        \{\{\neg R(x_1,x_1), \neg P(x_1)\}, \{\neg R(x_1,x_1), P(x_1)\}, \{\neg R(x_2,y_2), R(x_2,f(x_2,y_2))\},\\ \{\neg R(x_2,y_2), R(f(x_2,y_2),y_2)\}, \{R(a,b)\}\}
+        \end{multline*}
+        }
+
+        \begin{figure}[htb]
+            \centering
+            \input{cv-2/cv2-3c.tex}
+            \caption{Strom k příkladu 3 c)}
+        \end{figure}
+
+        Závěr: Formule je bezesporná (konzistentní).
+
+        \item SNF:
+
+        {\setlength{\mathindent}{0cm}
+        \setlength\abovedisplayskip{-1.5em}
+        \begin{multline*}
+        \forall x_1\forall x_2\forall y_2\forall z_2\forall x_3\forall y_3[R(x_1,f(x_1))\wedge [\neg R(x_2,y_2)\vee \neg R(y_2,z_2)\vee R(x_2,z_2)]\wedge \\\wedge[\neg E(x_3,y_3)\vee\neg R(x_3,y_3)]\wedge E(a,f(f(a)))]
+        \end{multline*}
+        }
+
+        MK:
+
+        $ \{ \{R(x_1,f(x_1))\}, \{\neg R(x_2,y_2), \neg R(y_2,z_2), R(x_2,z_2)\},\{\neg E(x_3,y_3),\neg R(x_3,y_3)\},\{E(a,f(f(a)))\} \} $
+
+        \begin{figure}[htb]
+            \centering
+            \input{cv-2/cv2-3d.tex}
+            \caption{Strom k příkladu 3 d)}
+        \end{figure}
+
+        Závěr: Formule je sporná (nekonzistentní).
+    \end{enumerate}
+\end{priklad}
+
+\begin{priklad}
+    Pomocí SLD rezoluce zjistěte, zda je následující množina Hornových klauzulí sporná.
+\end{priklad}
+\begin{enumerate}
+    \item $ \forall xT(x,x), $\\
+    $ \forall x\forall y\forall z\left[E(x,y)\wedge T(y,z)\rightarrow T(x,z)\right], $\\
+    $ E(a,b), $\\
+    $ E(b,c), $\\
+    $ E(c,d), $\\
+    $ \neg T(a,d). $
+    \item $ \forall xT(x,x), $\\
+    $ \forall x\forall y\forall z\left[T(x,y)\wedge E(y,z)\rightarrow T(x,z)\right], $\\
+    $ E(a,b), $\\
+    $ E(b,c), $\\
+    $ E(c,d), $\\
+    $ \neg T(a,d). $
+    \item $ R(c,c), $\\
+    $ \forall x\forall y\forall z\left[R(x,f(y,z))\rightarrow R(f(y,x),z)\right], $\\
+    $ \neg\forall x\forall y\left[R(f(x,f(y,c))),f(y,f(x,c))\right]. $
+\end{enumerate}
+\noindent\rule{\linewidth}{.2pt}
+\begin{enumerate}
+    \item 1. $ \forall xT(x,x) $\\
+    2. $ \forall x\forall y\forall z\left[\neg E(x,y)\vee \neg T(y,z)\vee T(x,z)\right] $\\
+    3. $ E(a,b) $\\
+    4. $ E(b,c) $\\
+    5. $ E(c,d) $\\
+    $ \neg T(a,d) $
+
+    \begin{figure}[htb]
+        \centering
+        \input{cv-2/cv2-4a.tex}
+        \caption{Strom k příkladu 4 a)}
+    \end{figure}
+
+    \item 1. $ \forall xT(x,x) $\\
+    2. $ \forall x\forall y\forall z\left[\neg T(x,y)\vee \neg E(y,z)\vee T(x,z)\right] $\\
+    3. $ E(a,b) $\\
+    4. $ E(b,c) $\\
+    5. $ E(c,d) $\\
+    $ \neg T(a,d) $
+
+    \begin{figure}[htb]
+        \centering
+        \input{cv-2/cv2-4b.tex}
+        \caption{Strom k příkladu 4 b)}
+    \end{figure}
+
+    \item 1. $ R(c,c) $\\
+    2. $ \forall x\forall y\forall z\left[\neg R(x,f(y,z))\vee R(f(y,x),z)\right] $\\
+    $ \neg R(f(a,f(b,c))),f(b,f(a,c)) $
+
+    \begin{figure}[htb]
+        \centering
+        \input{cv-2/cv2-4c.tex}
+        \caption{Strom k příkladu 4 c)}
+    \end{figure}
+\end{enumerate}
+\end{document}
