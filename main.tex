@@ -5,6 +5,7 @@
 \usepackage[english,czech]{babel}
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{tikz}
+\usetikzlibrary{calc}
 \usepackage{amssymb}	% multline
 \usepackage{amsthm}		% theoremstyle
 \usepackage[fleqn]{amsmath}	% multline
@@ -21,7 +22,128 @@
 \newcommand{\specialcell}[1]{\ifmeasuring@#1\else\omit$\displaystyle#1$\ignorespaces\fi}
 \makeatother
 
+\newcommand{\convexpath}[2]{
+    [   
+    create hullcoords/.code={
+        \global\edef\namelist{#1}
+        \foreach [count=\counter] \nodename in \namelist {
+            \global\edef\numberofnodes{\counter}
+            \coordinate (hullcoord\counter) at (\nodename);
+        }
+        \coordinate (hullcoord0) at (hullcoord\numberofnodes);
+        \pgfmathtruncatemacro\lastnumber{\numberofnodes+1}
+        \coordinate (hullcoord\lastnumber) at (hullcoord1);
+    },
+    create hullcoords
+    ]
+    ($(hullcoord1)!#2!-90:(hullcoord0)$)
+    \foreach [
+    evaluate=\currentnode as \previousnode using \currentnode-1,
+    evaluate=\currentnode as \nextnode using \currentnode+1
+    ] \currentnode in {1,...,\numberofnodes} {
+        let \p1 = ($(hullcoord\currentnode) - (hullcoord\previousnode)$),
+        \n1 = {atan2(\y1,\x1) + 90},
+        \p2 = ($(hullcoord\nextnode) - (hullcoord\currentnode)$),
+        \n2 = {atan2(\y2,\x2) + 90},
+        \n{delta} = {Mod(\n2-\n1,360) - 360}
+        in 
+        {arc [start angle=\n1, delta angle=\n{delta}, radius=#2]}
+        -- ($(hullcoord\nextnode)!#2!-90:(hullcoord\currentnode)$) 
+    }
+}
+
 \begin{document}
+\section*{Cvičení 1}
+\setcounter{priklad}{0}
+\begin{priklad}
+    Mějme následující formule.
+    \begin{enumerate}
+        \item $ (A \leftrightarrow B)\rightarrow (\neg A\wedge C) $
+        \item $ (A\rightarrow B)\rightarrow C $
+        \item $ A\leftrightarrow B $
+        \item $ (A\rightarrow B)\leftrightarrow (A\rightarrow C) $
+        \item $ (A\vee B)\wedge (A\vee C) $
+        \item $ \left[A\rightarrow (B\vee \neg A)\right]\rightarrow (B\rightarrow A) $
+        \item $ \left[(A\vee B)\rightarrow (C\rightarrow A)\right]\leftrightarrow (A\vee B\vee C) $
+    \end{enumerate}
+    
+    Pro každou z nich
+    \begin{itemize}
+        \item vytvořte pravdivostní tabulku a rozhodněte, zda je formule pravdivá a/nebo splnitelná
+        \item převeďte formuli do CNF pomocí pravdivostní tabulky
+        \item převeďte formuli do CNF pomocí ekvivalentních úprav
+        \item zapište formuli jako množinu klauzulí
+    \end{itemize}
+\end{priklad}
+
+\begin{priklad}
+    Které formule implikují následující formule?
+    \begin{enumerate}
+        \item $ A\wedge B $
+        \item $ A\vee B $
+        \item $ A\rightarrow B $
+        \item $ A\leftrightarrow B $
+        \item $ \neg A\wedge \neg B $
+        \item $ \neg A $
+        \item $ \neg(A\rightarrow B) $
+    \end{enumerate}
+\end{priklad}
+
+\begin{priklad}
+    Můžeme zakódovat $ n $-bitová čísla $ n $-ticí výrokových proměnných $ A_{n-1},\ldots,A_0 $.
+    \begin{enumerate}
+        \item Zapište formuli $ \varphi(A_1,A_0,B_1,B_0,C_2,C_1,C_0) $ pro sčítání 2bitových čísel $ \bar{A}+\bar{B} = \bar{C} $.
+        \item Zapište formuli $ \varphi(A_{n-1},\ldots,A_0,B_{n-1},\ldots,B_0,C_n,\ldots,C_0) $ pro sčítání $ n $-bitových čísel.
+    \end{enumerate}
+\end{priklad}
+
+\begin{priklad}
+    Pomocí algoritmu DPLL rozhodněte, které z následujících formulí jsou splnitelné.
+    \begin{enumerate}
+        \item $ \neg\left[(A\rightarrow B)\leftrightarrow (A\rightarrow C)\right] $
+        \item $ (A\vee B\vee C)\wedge (B\vee D)\wedge (A\rightarrow D)\wedge (B\rightarrow A) $
+        \item $ (A\leftrightarrow B)\rightarrow (\neg A\wedge C) $
+        \item $ \left[A\rightarrow (B\vee\neg A)\right]\rightarrow (B\rightarrow A) $
+        \item $ \left[(A\vee B)\rightarrow (C\rightarrow A)\right]\leftrightarrow (A\vee B\vee C) $
+    \end{enumerate}
+\end{priklad}
+
+\begin{priklad}
+    Rezoluční metodou rozhodněte, které z následujících formulí jsou pravdivé (tautologie).
+    
+    \begin{enumerate}
+        \item $ (A\wedge \neg B\wedge C)\vee (\neg A\wedge\neg B\wedge\neg C)\vee (B\vee C)\vee (A\wedge \neg C)\vee (\neg A\wedge B\wedge\neg C)\vee (\neg A\wedge\neg B\wedge C) $
+        \item $ (A\wedge B)\vee (B\wedge C\wedge D)\vee (\neg A\wedge B)\vee (\neg C\wedge \neg D) $
+        \item
+        {\setlength{\mathindent}{0cm}
+        \setlength\abovedisplayskip{-1.5em}
+        \begin{multline*}
+        (\neg A\wedge B\wedge \neg C)\vee (\neg B\wedge\neg C\wedge D)\vee (\neg C\wedge \neg D)\vee (A\wedge B)\vee (\neg A\wedge B\wedge C)\vee (\neg A\wedge C)\vee (A\wedge\neg B\wedge C)\vee\\ \vee (A\wedge\neg B\wedge D)
+        \end{multline*}
+        }
+    \end{enumerate}
+\end{priklad}
+
+\begin{priklad}
+    Mějme konečný automat $ \mathcal{A} $ a vstupní slovo $ w $. Zapište formuli $ \varphi_{\mathcal{A},W} $ splnitelnou právě tehdy, když automat $ \mathcal{A} $ akceptuje slovo $ w $.
+\end{priklad}
+
+\begin{priklad}
+    Vytvořte hru pro následující množinu Hornových klauzulí a určete výherní oblasti.
+    
+    \begin{align*}
+    B\wedge C\wedge D&\rightarrow A & C\wedge F&\rightarrow B & A\wedge F&\rightarrow C & D&\rightarrow B & A\wedge B&\rightarrow F \\
+    E&\rightarrow A & D\wedge E&\rightarrow B & &C & &D &&
+    \end{align*}
+    
+    \begin{figure}[htb]
+        \centering
+        \input{cv-1/cv1-7.tex}
+        \caption{Výherní oblasti k příkladu 7}
+    \end{figure}
+\end{priklad}
+
+    
 \section*{Cvičení 2}
 \setcounter{priklad}{0}
 \begin{priklad}
