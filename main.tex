@@ -10,6 +10,7 @@
 \usepackage{amsthm}		% theoremstyle
 \usepackage[fleqn]{amsmath}	% multline
 \usepackage{todonotes}
+\usepackage{cancel}
 
 \theoremstyle{definition}
 %\newtheorem{exercise}{Exercise}
@@ -74,6 +75,140 @@
         \item převeďte formuli do CNF pomocí ekvivalentních úprav
         \item zapište formuli jako množinu klauzulí
     \end{itemize}
+\noindent\rule{\linewidth}{.2pt}
+    \begin{enumerate}
+        \item        
+%        \begin{table}[hbt]
+%            \centering
+            \begin{tabular}{|c|c|c|c|c|c|}
+                \hline 
+                $ A $ & $ B $ & $ C $ & $ A\leftrightarrow B$ & $\neg A\wedge C $ & $ (A \leftrightarrow B)\rightarrow (\neg A\wedge C) $ \\ 
+                \hline 
+                1 & 1 & 1 & 0 & 0 & 0 \\
+                1 & 1 & 0 & 1 & 0 & 0 \\
+                1 & 0 & 1 & 0 & 0 & 1 \\
+                1 & 0 & 0 & 0 & 0 & 1 \\
+                0 & 1 & 1 & 0 & 1 & 1 \\
+                0 & 1 & 0 & 0 & 0 & 1 \\
+                0 & 0 & 1 & 1 & 1 & 1 \\
+                0 & 0 & 0 & 1 & 0 & 0 \\ 
+                \hline 
+            \end{tabular} 
+%        \caption{Pravdivostní tabulka 1 a)}
+%        \end{table}
+    
+        Pro převod do CNF pomocí tabulky se díváme na řádky s nulou. Výrokové proměnné případně znegujeme, abychom dostali nepravdivou disjunkci proměnných.
+        
+        CNF z tabulky:
+        \[ (\neg A\vee \neg B\vee \neg C)\wedge (\neg A\vee \neg B \vee C)\wedge (A\vee B\vee C) \]
+        
+        CNF z ekvivalentních úprav: 
+        {      
+%         \setlength{\mathindent}{0cm}
+%         \setlength\abovedisplayskip{-.5em}
+        \begin{multline*}
+        (A \leftrightarrow B)\rightarrow (\neg A\wedge C) \approx \neg [(\neg A\vee B)\wedge (\neg B\vee A)]\vee (\neg A\wedge C) \approx (A\wedge \neg B)\vee (B\wedge \neg A) \vee (\neg A\wedge C) \approx\\
+         [(A\vee B)\wedge \cancel{(A\vee \neg A)}\wedge \cancel{(\neg B\vee B)}\wedge (\neg B\vee \neg A)]\vee (\neg A\wedge C) \approx [(A\vee B)\vee (\neg A\wedge C)]\wedge [(\neg B\vee \neg A)\vee \\
+         \vee (\neg A\wedge C)] \approx 
+         (A\vee B\vee C) \wedge (\neg B\vee \neg A)\wedge \neg A \wedge (\neg B\vee C) \wedge (\neg A\vee C)
+        \end{multline*}
+        }
+        
+        CNF podle WolframAlpha:
+        \[ (\neg A\vee \neg B)\wedge (A\vee B\vee C) \]
+        
+        \item
+        
+%        \begin{table}[hbt]
+%            \centering
+            \begin{tabular}{|c|c|c|c|c|}
+                \hline 
+                 $ A $ & $ B $ & C & $ A\rightarrow B $ & $ (A\rightarrow B)\rightarrow C $ \\
+                 \hline 
+                 1 & 1 & 1 & 1 & 1 \\ 
+                 1 & 1 & 0 & 1 & 0 \\ 
+                 1 & 0 & 1 & 0 & 1 \\ 
+                 1 & 0 & 0 & 0 & 1 \\ 
+                 0 & 1 & 1 & 1 & 1 \\ 
+                 0 & 1 & 0 & 1 & 0 \\ 
+                 0 & 0 & 1 & 1 & 1 \\ 
+                 0 & 0 & 0 & 1 & 0 \\
+                 \hline
+            \end{tabular}
+%        \caption{Pravdivostní tabulka 1 b)}
+%        \end{table}
+    
+        \item
+        
+%        \begin{table}[hbt]
+%            \centering
+            \begin{tabular}{|c|c|c|}
+                \hline 
+                $ A $ & $ B $ & $ A\leftrightarrow B $ \\
+                1 & 1 & 1 \\
+                1 & 0 & 0 \\
+                0 & 1 & 0 \\
+                0 & 0 & 1 \\
+                \hline
+            \end{tabular}
+%            \caption{Pravdivostní tabulka 1 c)}
+%        \end{table}
+    
+        \item
+        
+%        \begin{table}[hbt]
+%        \centering
+        \begin{tabular}{|c|c|c|c|c|c|}
+            \hline 
+            $ A $ & $ B $ & $ C $ & $ A\rightarrow B $ & $ A\rightarrow C $ & $ (A\rightarrow B)\leftrightarrow (A\rightarrow C) $ \\
+            1 & 1 & 1 & 1 & 1 & 1 \\
+            1 & 1 & 0 & 1 & 0 & 0 \\
+            1 & 0 & 1 & 0 & 1 & 0 \\
+            1 & 0 & 0 & 0 & 0 & 1 \\
+            0 & 1 & 1 & 1 & 1 & 1 \\
+            0 & 1 & 0 & 1 & 1 & 1 \\
+            0 & 0 & 1 & 1 & 1 & 1 \\
+            0 & 0 & 0 & 1 & 1 & 1 \\
+            \hline
+        \end{tabular}
+%        \caption{Pravdivostní tabulka 1 d)}
+%        \end{table}
+    
+    \item
+    
+    \begin{centering}
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline 
+        $ A $ & $ B $ & $ C $ & $ A\vee B $ & $ A\vee C $ & $ (A\vee B)\wedge (A\vee C) $ \\
+        1 & 1 & 1 & 1 & 1 & 1 \\
+        1 & 1 & 0 & 1 & 1 & 1 \\
+        1 & 0 & 1 & 1 & 1 & 1 \\
+        1 & 0 & 0 & 1 & 1 & 1 \\
+        0 & 1 & 1 & 1 & 1 & 1 \\
+        0 & 1 & 0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 \\
+        \hline
+    \end{tabular}
+%    \caption{Pravdivostní tabulka 1 e)}
+    \end{centering}
+
+    \item
+
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline 
+        $ A $ & $ B $ & $ C $ & $ \left[(A\vee B)\rightarrow (C\rightarrow A)\right] $ & $ A\vee B\vee C $ & $ \left[(A\vee B)\rightarrow (C\rightarrow A)\right]\leftrightarrow (A\vee B\vee C) $ \\
+        1 & 1 & 1 & 1 & 1 & 1 \\
+        1 & 1 & 0 & 1 & 1 & 1 \\
+        1 & 0 & 1 & 1 & 1 & 1 \\
+        1 & 0 & 0 & 1 & 1 & 1 \\
+        0 & 1 & 1 & 0 & 1 & 0 \\
+        0 & 1 & 0 & 1 & 1 & 1 \\
+        0 & 0 & 1 & 1 & 1 & 1 \\
+        0 & 0 & 0 & 1 & 0 & 0 \\
+        \hline
+    \end{tabular}
+    \end{enumerate}
 \end{priklad}
 
 \begin{priklad}
@@ -334,7 +469,7 @@
         Závěr: Formule je sporná (nekonzistentní).
 
         \item SNF:
-
+        
         {\setlength{\mathindent}{0cm}
         \setlength\abovedisplayskip{-2.5em}
         \begin{multline*}
@@ -345,7 +480,7 @@
         }
 
         MK:
-
+         
         {\setlength{\mathindent}{0cm}
         \setlength\abovedisplayskip{-1.5em}
         \begin{multline*}
