@@ -660,7 +660,7 @@
 
 % priklad 6
 \begin{priklad}
-    Vyhodnoťte následující program v Datalogu na stromě (V,E,P) doprava.
+    Vyhodnoťte následující program v Datalogu na stromě $ (V,E,P) $ doprava.
     
     \begin{minipage}{0.48\textwidth}
       \begin{align*}
@@ -691,6 +691,85 @@
       ;
     \end{tikzpicture}      
     \end{minipage}
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+\newpage
+\section*{Cvičení 4}
+\setcounter{priklad}{0}
+% priklad 1
+\begin{priklad}
+    Použitím přirozené dedukce dokažte, že následující formule jsou pravdivé.
+    
+    \begin{enumerate}
+      \item $ \varphi\wedge \psi\rightarrow\psi\wedge\varphi $
+      \item $ \psi\rightarrow ((\varphi\wedge\psi)\vee\psi) $
+      \item $ (\neg \psi\rightarrow \neg\varphi) \rightarrow (\varphi\rightarrow\psi) $
+      \item $ \varphi \rightarrow \neg\neg\varphi $
+      \item $ ((\varphi\wedge\psi)\vee\psi) \rightarrow \psi $
+      \item $ \neg\neg\varphi \rightarrow \varphi $
+      \item $ \varphi\vee \neg\varphi $
+      \item $ \neg(\neg\varphi\wedge\neg\psi) \rightarrow (\varphi\vee\psi) $ (Zákeřné)
+      \item $ \varphi \rightarrow \exists x\varphi $
+      \item $ \forall x\varphi \rightarrow \varphi $
+      \item $ \forall xR(x,x) \rightarrow \forall x\exists yR(f(x),y) $
+      \item $ \exists x(\varphi\vee\psi) \rightarrow (\exists x\varphi\vee\exists x\psi) $
+      \item $ (\exists x\varphi\vee \exists x\psi) \rightarrow \exists x(\varphi\vee\psi) $
+      \item $ \forall x\varphi \wedge \forall x\psi \rightarrow \forall x(\varphi\wedge\psi) $
+      \item $ \forall x(\varphi\wedge \psi) \rightarrow \forall x\varphi \wedge \forall x\psi $
+      \item $ \forall x\forall y[\varphi(x) \leftrightarrow \varphi(y)] \wedge \exists x\varphi(x) \rightarrow \forall x\varphi(x) $
+    \end{enumerate}
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 2
+\begin{priklad}
+    Použitím tableau důkazu ukažte, že formule z příkladu 1 jsou pravdivé.
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 3
+\begin{priklad}
+    Najděte všechny konzistentní množiny pro následující množiny pravidel.
+    
+    \begin{enumerate}
+      \item $\displaystyle \frac{}{\alpha} \quad \frac{\alpha:\beta}{\delta} \quad \frac{\alpha:\gamma}{\delta}$
+      \item $\displaystyle \frac{}{\alpha} \quad \frac{\alpha:\beta\gamma}{\beta}$
+      \item $\displaystyle \frac{}{\alpha} \quad \frac{\alpha\beta}{\gamma} \quad \frac{\alpha:\gamma}{\beta}$
+    \end{enumerate}
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 4
+\begin{priklad}
+    Pro každou podmnožinu $ \Phi\subseteq \mathcal{P}(\{\alpha,\beta\}) $ se pokuste najít množinu pravidel $ R $ takovou, že $ \Phi $ je množinou všech konzistentních množin pro $ R $.
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 5
+\begin{priklad}
+    Ze základních pravidel přirozené dedukce odvoďte následující pravidla.
+    
+    \[
+    \frac{\Gamma\vdash \neg\neg\varphi}{\Gamma\vdash\varphi} \qquad 
+    \frac{\Gamma\vdash \varphi}{\Gamma,\Delta\vdash\varphi} \qquad
+    \frac{\Gamma,\neg\varphi\vdash \neg\psi}{\Gamma\vdash\psi\rightarrow\varphi} \qquad
+    \frac{\Gamma,\neg\varphi\vdash \psi}{\Gamma\vdash\varphi\vee\psi}
+    \]
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 6
+\begin{priklad}
+    Najděte pravidlo pro důkazy indukcí.
+    
+    \[ \frac{\ldots\quad\ldots}{\forall x\varphi(x)} \qquad \text{kde } \varphi(x) \text{ je formule mluvící o přirozených číslech.} \]
     
 \noindent\rule{\linewidth}{.2pt}    
 \end{priklad}
