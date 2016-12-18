@@ -577,4 +577,121 @@
         \caption{Strom k příkladu 4 c)}
     \end{figure}
 \end{enumerate}
+
+\section*{Cvičení 3}
+\setcounter{priklad}{0}
+% priklad 1
+\begin{priklad}
+    Předpokládejme, že mámem predikát flight(From, To, Time, Price) obsahující informaci o přímých letech včetně místa odletu, místa příletu, délky letu a ceny za letenku. Napište Program v Prologu, který počítá predikát travel(From, To, Stops, Time, Price) zahrnující všechny možnosti letu z jednoho města do jiného s možností přestupů.
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 2
+\begin{priklad}
+    Napište v Prologu predikát fib(N, X), který počítá Fibonacciho posloupnost. Vyhodnoťte fib(3, X) a fib(N, 5).
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 3
+\begin{priklad}
+    Napište v Prologu definice následujících predikátů.
+    
+    \begin{table}[htb]
+      \begin{center}
+        \begin{tabular}{r@{\qquad}l}
+           length(List, N) & $ N $ je délka Listu \\
+           reverse(X, Y) & $ Y $ je převrácený seznam $ X $ \\
+           append(X, Y, Z) & $ Z $ je spojení seznamů $ X $ a $ Y $ \\
+           map(X, Y) & mapuje seznam $ X = [X_1,\ldots,X_n] $ na $ Y = [f(X_1),\ldots,f(X_n)] $ \\
+           fold\_left(X, Y, Z) & mapuje $ Y = [Y_1,\ldots,Y_n] $ na $ Z = f(\ldots f(f(X,Y_1),Y_2)\ldots,Y_n) $ \\
+           fold\_right(X, Y, Z) & mapuje $ Y = [Y_1,\ldots,Y_n] $ na $ Z = f(Y_1,f(Y_2,\ldots,f(Y_n,X)\ldots)) $
+        \end{tabular}
+      \end{center}
+    \end{table}
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 4
+\begin{priklad}
+    Napištenaivní řadící funkci\\
+    \quad \texttt{naive\_sort(X, Y) :- permute(X, Y), sorted(Y).}\\
+    implementovanou relacemi
+    
+    \begin{table}[htb]
+      \begin{center}
+        \begin{tabular}{r@{\qquad}l}
+           sorted(X) & kontroluje, že je seznam $ X $ seřazen \\
+           insert(X, Y, Z) & seznam $ Z $ jsme získali přidáním $ X $ na libovolnou pozici do seznamu $ Y $ \\
+           permute(X, Y) & seznam $ Y $ je permutací seznamu $ X $
+        \end{tabular}
+      \end{center}
+    \end{table}
+    
+    Implementujte merge sort využitím relace
+    
+    \begin{table}[htb]
+      \begin{center}
+        \begin{tabular}{r@{\qquad}l}
+           merge(X, Y, Z) & spojí dva seřazene seznamy $ X $ a $ Y $ do seznamu $ Z $
+        \end{tabular}
+      \end{center}
+    \end{table}
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 5
+\begin{priklad}
+    Uvažujme orientovaný graf $ G = (V,E) $. Vyjádřete relace v relační algebře.
+    
+    \begin{enumerate}
+      \item $ x $ a $ y $ nejsou spojeny hranou
+      \item hrana $ (x,y) $ je součástí trojúhelníka
+      \item $ x $ má aspoň dva sousedy
+      \item každý soused $ x $ je zároveň sousedem $ y $
+    \end{enumerate}
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 6
+\begin{priklad}
+    Vyhodnoťte následující program v Datalogu na stromě (V,E,P) doprava.
+    
+    \begin{minipage}{0.48\textwidth}
+      \begin{align*}
+      U &\leftarrow S(x,y)\wedge W(x)\wedge W(y) \\
+      W(x) &\leftarrow P(x) \\
+      W(x) &\leftarrow E(x,y) \wedge W(y) \\
+      S(x,y) &\leftarrow E(z,x)\wedge E(z,y)\wedge x\neq y \\
+      R(x,y) &\leftarrow P(x)\wedge x=y \\
+      R(x,y) &\leftarrow E(x,z)\wedge R(z,y) \\
+      R(x,y) &\leftarrow R(x,z)\wedge E(z,y)
+      \end{align*}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.3\textwidth}
+    \begin{tikzpicture}[
+    ->,
+    level distance=1cm,
+    label distance=-.1cm]
+    \node {1}
+      child {node {2}
+        child {node {4}}
+        child {node[label={below:P}] {5}}}
+      child {node[label={above right:P}] {3}
+        child[missing]
+        child{node {6}
+          child {node[label={below:P}] {7}}
+          child {node {8}}}}
+      ;
+    \end{tikzpicture}      
+    \end{minipage}
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
 \end{document}
