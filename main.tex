@@ -852,4 +852,85 @@
 \noindent\rule{\linewidth}{.2pt}    
 \end{priklad}
 
+\newpage
+\section*{Cvičení 6}
+\setcounter{priklad}{0}
+% priklad 1
+\begin{priklad}
+    Uvažujme slova nad abecedou $ \{a,b\} $ jako přechodové systémy $ (S,E_s,E_r,P_a,P_b) $, kde stavy $ S $ jsou pozice, dva predikáty $ P_a $ a $ P_b $ označí každou pozici odpovídajících znakem a dvě hranové relace
+    \[ E_s = \{(i,i+1) \mid i<n-1\}\mbox{,}\qquad E_r = \{(i,k) \mid i\leq k<n\}\mbox{,} \]
+    kde $ n = |S| $ je délka slova. Definujte následující jazyky v modální logice.
+    
+    \begin{enumerate}
+      \item všechna slova začínající na písmeno $ a $
+      \item všechna slova se skládají pouze z písmen $ a $
+      \item všechna slova končí na písmeno $ a $
+      \item $ a^*b^* $
+      \item všechna slova obsahují faktor $ bb $
+      \item všechna slova obsahují aspoň dvě písmena $ b $
+      \item všechna slova obsahují právě dvě písmena $ b $
+      \item $ (ab)* $
+    \end{enumerate}
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 2
+\begin{priklad}
+    Přepište následující formule do predikátové logiky.
+    
+    \begin{enumerate}
+      \item $ [a]P\rightarrow P $
+      \item $ P\rightarrow \langle a\rangle Q $
+      \item $ [a](P\wedge \langle b\rangle Q) \rightarrow (\langle a\rangle P\vee\langle b\rangle Q) $
+    \end{enumerate}
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 3
+\begin{priklad}
+    Dokažte následující modální formule pomocí tabel.
+    
+    \begin{enumerate}
+      \item $ \Box (P\leftrightarrow (Q\wedge R)) \rightarrow (\Box P\leftrightarrow (\Box Q\wedge \Box R)) $
+      \item $ \neg\Box\Box P\leftrightarrow \Diamond\Diamond\neg P $
+      \item $ \Box (P\wedge \neg P)\rightarrow \Box Q $
+      \item $ \neg \Diamond P\rightarrow \Box(P\rightarrow Q) $
+    \end{enumerate}
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 4
+\begin{priklad}
+    Najděte CTL$ ^* $ formule definující následující vlastnosti $ \{a,b\} $-označených stromů.
+    
+    \begin{enumerate}
+      \item je aspoň jedno označení $ b $
+      \item každá cesta obsahuje nějaké $ b $
+      \item každá cesta obsahuje aspoň dvě $ b $
+      \item všechny cesty obsahují nekonečně mnoho $ b $
+      \item nějaká cesta obsahuje nekonečně mnoho $ b $
+    \end{enumerate}
+    
+\noindent\rule{\linewidth}{.2pt}    
+\end{priklad}
+
+% priklad 5
+% \begin{priklad}
+%     Modelujeme výtah v 3patrové budově.
+%     
+%     \begin{enumerate}
+%       \item Popište výtah jako přechodový systém.
+%       \item Napište specifikaci pro výtah v modální logice a v LTL. Začněte s následujícími dvěma tvrzeními, poté přidejte vlastní.
+%         \begin{enumerate}
+%           \item Výtah se nikdy nepohne, když jsou dveře otevřené.
+%           \item Je-li
+%         \end{enumerate}
+%     \end{enumerate}
+%     
+% \noindent\rule{\linewidth}{.2pt}    
+% \end{priklad}
+
 \end{document}
