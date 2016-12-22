@@ -1,0 +1,16 @@
+\documentclass[]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[czech]{babel}
+\usepackage{ebproof}
+
+\begin{document}
+  \begin{prooftree}
+  \Hypo{\varphi, \neg\varphi \vdash \varphi}
+  \Hypo{\varphi, \neg\varphi \vdash \neg\varphi}
+  \Infer2[$ I_\perp $]{\varphi, \neg\varphi \vdash \perp}
+  \Infer1[$ I_\neg $]{\varphi \vdash \neg\neg\varphi}
+  \Infer1[$ I_\rightarrow $]{\vdash \varphi \rightarrow \neg\neg\varphi}
+  \end{prooftree}
+\end{document}

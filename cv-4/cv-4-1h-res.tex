@@ -1,0 +1,45 @@
+\documentclass[]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[czech]{babel}
+\usepackage{ebproof}
+
+\begin{document}
+  \begin{prooftree}
+  \Hypo{\neg(\varphi \vee \neg\varphi), \varphi \vdash \varphi}
+  \Infer1[$ I_\vee$]{\neg(\varphi \vee \neg\varphi), \varphi \vdash \varphi \vee \neg\varphi}
+  \Hypo{\neg(\varphi \vee \neg\varphi), \varphi \vdash \neg(\varphi \vee \neg\varphi)}
+  \Infer2[$ I_\perp $]{\neg(\varphi \vee \neg\varphi), \varphi \vdash \perp}
+  \Infer1[$ I_\neg $]{\neg(\varphi \vee \neg\varphi) \vdash \neg\varphi}
+  \Hypo{\neg(\varphi \vee \neg\varphi), \neg\varphi \vdash \neg\varphi}
+  \Infer1[$ I_\vee $]{\neg(\varphi \vee \neg\varphi), \neg\varphi \vdash \varphi \vee \neg\varphi}
+  \Hypo{\neg(\varphi \vee \neg\varphi), \neg\varphi \vdash \neg(\varphi \vee \neg\varphi)}
+  \Infer2[$ I_\perp $]{\neg(\varphi \vee \neg\varphi), \neg\varphi \vdash \perp}
+  \Infer1[$ I_\neg $]{\neg(\varphi \vee \neg\varphi) \vdash \neg\neg\varphi}
+  \Infer2[$ I_\perp $]{\neg(\varphi \vee \neg\varphi) \vdash \perp}
+  \Infer1[$ I_\neg $]{\vdash \neg\neg(\varphi \vee \neg\varphi)}
+  \Hypo{\neg\neg(\varphi \vee \neg\varphi), \neg(\varphi \vee \neg\varphi) \vdash \neg(\varphi \vee \neg\varphi)}
+  \Hypo{\neg\neg(\varphi \vee \neg\varphi), \neg(\varphi \vee \neg\varphi) \vdash \neg\neg(\varphi \vee \neg\varphi)}
+  \Infer2[$ I_\perp $]{\neg\neg(\varphi \vee \neg\varphi), \neg(\varphi \vee \neg\varphi) \vdash \perp}
+  \Infer1[$ E_\neg $]{\neg\neg(\varphi \vee \neg\varphi) \vdash \varphi \vee \neg\varphi}
+  \Infer1[$ I_\rightarrow $]{\vdash \neg\neg(\varphi \vee \neg\varphi) \rightarrow (\varphi \vee \neg\varphi)}
+  \Infer2[$ E_\rightarrow $]{\vdash \varphi\vee\neg\varphi}
+  \Hypo{\varphi \vdash \varphi}
+  \Infer1[$ I_\vee $]{\varphi \vdash \varphi\vee \psi}
+  \Hypo{\neg(\neg\varphi\wedge\neg\psi), \neg\varphi, \neg\psi \vdash \neg(\neg\varphi\wedge\neg\psi)}
+  \Hypo{\neg(\neg\varphi\wedge\neg\psi), \neg\varphi \vdash \neg\varphi}
+  \Hypo{\neg\psi \vdash \neg\psi}
+  \Infer2[$ I_\wedge $]{\neg(\neg\varphi\wedge\neg\psi), \neg\varphi, \neg\psi \vdash \neg\varphi\wedge\neg\psi}
+  \Infer2[$ E_\neg $]{\neg(\neg\varphi\wedge\neg\psi), \neg\varphi \vdash \neg\neg\psi}
+  \Hypo{\neg\neg\psi, \neg\psi \vdash \neg\psi}
+  \Hypo{\neg\neg\psi, \neg\psi \vdash \neg\neg\psi}
+  \Infer2[$ I_\perp $]{\neg\neg\psi, \neg\psi \vdash \perp}
+  \Infer1[$ E_\neg $]{\neg\neg\psi \vdash \psi}
+  \Infer1[$ I_\rightarrow $]{\vdash \neg\neg\psi \rightarrow \psi}
+  \Infer2[$ E_\rightarrow $]{\neg(\neg\varphi\wedge\neg\psi), \neg\varphi \vdash \psi}
+  \Infer1[$ I_\vee $]{\neg(\neg\varphi\wedge\neg\psi), \neg\varphi \vdash \varphi\vee \psi}
+  \Infer3[$ E_\vee $]{\neg(\neg \varphi\wedge\neg\psi) \vdash (\varphi\vee\psi)}
+  \Infer1[$ I_\rightarrow $]{\vdash \neg(\neg \varphi\wedge\neg\psi) \rightarrow (\varphi\vee\psi)}
+  \end{prooftree}
+\end{document}

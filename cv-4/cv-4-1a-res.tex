@@ -1,0 +1,15 @@
+\documentclass[]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[czech]{babel}
+\usepackage{ebproof}
+
+\begin{document}
+  \begin{prooftree}
+    \Hypo{\psi \vdash \psi}
+    \Hypo{\varphi \vdash \varphi}
+    \Infer2[$ I_\wedge $]{\varphi,\psi &\vdash \psi \wedge \varphi}
+    \Infer1[$ I_\rightarrow $]{&\vdash \varphi \wedge \psi \rightarrow \psi \wedge \varphi}
+  \end{prooftree}
+\end{document}
