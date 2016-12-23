@@ -1,0 +1,30 @@
+\documentclass[]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[czech]{babel}
+\usepackage{prooftrees}
+
+\begin{document}
+\begin{prooftree}
+{
+to prove={\vdash (\neg \psi\rightarrow \neg\varphi) \rightarrow (\varphi\rightarrow\psi)}
+}
+[{F: (\neg \psi\rightarrow \neg\varphi) \rightarrow (\varphi\rightarrow\psi)}, just=Negace závěru
+  [{T: \neg \psi\rightarrow \neg\varphi}, just=$ \rightarrow\mbox{E} $:!r1, name=limp
+    [{F: \varphi\rightarrow\psi}, just=$ \rightarrow\mbox{E} $:!r1, name=rimp   
+      [{T: \varphi}, just=$ \rightarrow\mbox{E} $:rimp, name=tfi
+        [{F: \psi}, just=$ \rightarrow\mbox{E} $:rimp, name=fpsi
+          [{F: \neg\psi}, just=$ \rightarrow\mbox{E} $:limp
+            [{T: \psi}, just=$ \neg\mbox{E} $:!u, close={:fpsi,!c}]
+          ]
+          [{T: \neg\varphi}, just=$ \rightarrow\mbox{E} $:limp
+            [{F: \varphi}, just=$ \neg\mbox{E} $:!u, close={:tfi,!c}]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\end{prooftree}
+\end{document}
