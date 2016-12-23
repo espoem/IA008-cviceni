@@ -1,0 +1,26 @@
+\documentclass[]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[czech]{babel}
+\usepackage{prooftrees}
+
+\begin{document}
+\begin{prooftree}
+{
+to prove={\vdash \varphi \wedge \psi \rightarrow \psi \wedge \varphi}
+}
+[{F: \varphi \wedge \psi \rightarrow \psi \wedge \varphi}, just=Negace závěru
+  [{T: \varphi \wedge \psi}, just=$ \rightarrow\mbox{E} $:!r1, name=limp
+    [{F: \psi \wedge \varphi}, just=$ \rightarrow\mbox{E} $:!r1, name=rimp
+      [{T: \varphi}, just=$ \wedge \mbox{E} $:limp, name=fi
+        [{T: \psi}, just=$ \wedge \mbox{E} $:limp, name=psi
+          [{F: \psi}, just=$ \wedge \mbox{E} $:rimp, close={:psi,!c}]
+          [{F: \varphi}, just=$ \wedge \mbox{E} $:rimp, close={:fi,!c}]
+        ]
+      ]
+    ]
+  ]
+]
+\end{prooftree}
+\end{document}
