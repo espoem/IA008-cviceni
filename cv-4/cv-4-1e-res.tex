@@ -8,9 +8,10 @@
 \begin{document}
   \begin{prooftree}
     \Hypo{(\varphi \wedge \psi) \vee \psi \vdash (\varphi \wedge \psi) \vee \psi}
-    \Hypo{\varphi \wedge \psi \vdash \psi}
+    \Hypo{\varphi \wedge \psi \vdash \varphi \wedge \psi}
+    \Infer1{\varphi \wedge \psi \vdash \psi}
     \Hypo{\psi \vdash \psi}
     \Infer3[$ E_\vee $]{(\varphi \wedge \psi) \vee \psi \vdash \psi}
-    \Infer1[$ I_\rightarrow $]{&\vdash ((\varphi \wedge \psi) \vee \psi) \rightarrow \psi}
+    \Infer1[$ I_\rightarrow $]{\vdash ((\varphi \wedge \psi) \vee \psi) \rightarrow \psi}
   \end{prooftree}
 \end{document}
