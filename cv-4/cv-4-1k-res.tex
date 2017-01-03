@@ -1,0 +1,16 @@
+\documentclass[]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[czech]{babel}
+\usepackage{ebproof}
+
+\begin{document}
+  \begin{prooftree}
+  	\Hypo{\forall xR(x,x) \vdash \forall xR(x,x)}
+  	\Infer1[$ E_\forall $]{\forall xR(x,x) \vdash R(f(c),f(c)}
+  	\Infer1[$ I_\exists $]{\forall xR(x,x) \vdash \exists yR(f(c),y)}
+	\Infer1[$ I_\forall $]{\forall xR(x,x) \vdash \forall x\exists yR(f(x),y)}  
+	\Infer1[$ I_\rightarrow $]{\vdash \forall xR(x,x) \rightarrow \forall x\exists yR(f(x),y)}
+  \end{prooftree}
+\end{document}
