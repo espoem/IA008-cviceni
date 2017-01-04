@@ -31,7 +31,8 @@
   \Hypo{\neg(\neg\varphi\wedge\neg\psi), \neg\varphi \vdash \neg\varphi}
   \Hypo{\neg\psi \vdash \neg\psi}
   \Infer2[$ I_\wedge $]{\neg(\neg\varphi\wedge\neg\psi), \neg\varphi, \neg\psi \vdash \neg\varphi\wedge\neg\psi}
-  \Infer2[$ E_\neg $]{\neg(\neg\varphi\wedge\neg\psi), \neg\varphi \vdash \neg\neg\psi}
+  \Infer2[$ I_\perp $]{\neg(\neg\varphi\wedge\neg\psi), \neg\varphi, \neg\psi \vdash \perp}
+  \Infer1[$ I_\neg $]{\neg(\neg\varphi\wedge\neg\psi), \neg\varphi \vdash \neg\neg\psi}
   \Hypo{\neg\neg\psi, \neg\psi \vdash \neg\psi}
   \Hypo{\neg\neg\psi, \neg\psi \vdash \neg\neg\psi}
   \Infer2[$ I_\perp $]{\neg\neg\psi, \neg\psi \vdash \perp}
